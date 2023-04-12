@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Table(name = "productos")
+@Table(name = "product")
 public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

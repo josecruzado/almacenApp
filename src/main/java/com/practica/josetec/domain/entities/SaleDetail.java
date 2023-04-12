@@ -11,7 +11,10 @@ public class SaleDetail implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "product")
     private Product product;
     private int quantity;
+    @ManyToOne
+    private Sale sale;
 }

@@ -20,7 +20,7 @@ public class SaleServiceImpl {
     }
 
     private void validateSale(Sale sale) throws InvalidSaleException {
-        if (sale.getSaleDetails().get(0).getQuantity() <= 0) {
+        if (sale.getSaleDetail().get(0).getQuantity() <= 0) {
             throw new InvalidSaleException("Quantity must be greater than 0");
         }
     }

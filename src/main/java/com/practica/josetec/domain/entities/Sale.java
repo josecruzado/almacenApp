@@ -21,11 +21,12 @@ public class Sale implements Serializable {
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime date;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "client")
     private Client client;
 
-    @OneToMany
-    private ArrayList<SaleDetail> saleDetails;
+    @OneToMany(mappedBy = "sale")
+    private ArrayList<SaleDetail> saleDetail;
 
     private String status;
 }

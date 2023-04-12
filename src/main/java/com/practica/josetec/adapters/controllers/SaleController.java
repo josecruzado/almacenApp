@@ -1,7 +1,7 @@
 package com.practica.josetec.adapters.controllers;
 
-import com.practica.josetec.application.dtos.ProductDto;
 import com.practica.josetec.application.services.ProductService;
+import com.practica.josetec.domain.entities.Sale;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +16,10 @@ public class SaleController {
 
     @Autowired
     private ProductService productoService;
+
     @PostMapping("/")
     public ResponseEntity<?> createSale(@RequestBody Sale sale) {
-        ProductDto createdProduct = productoService.createProduct(productDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+        Sale newSale = productoService.createSale(sale);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newSale);
     }
 }

@@ -2,8 +2,10 @@ package com.practica.josetec.application.services;
 
 import com.practica.josetec.adapters.converters.ProductMapper;
 import com.practica.josetec.adapters.repositories.ProductRepository;
+import com.practica.josetec.adapters.repositories.SaleRepository;
 import com.practica.josetec.application.dtos.ProductDto;
 import com.practica.josetec.domain.entities.Product;
+import com.practica.josetec.domain.entities.Sale;
 import com.practica.josetec.domain.exceptions.ProductNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
 public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private SaleRepository saleRepository;
     @Autowired
     private ProductMapper productMapper;
 
@@ -71,5 +75,21 @@ public class ProductServiceImpl implements ProductService {
         return productMapper.toDto(product);
     }
 
+//    public void sellProducts(Long productId, Integer quantity) {
+//        Product product = getProduct(productId);
+//        Sale sale = new Sale(product, quantity);
+//        saleService.registerSale(sale);
+//        product.decreaseStock(quantity);
+//        productRepository.save(product);
+//    }
+
+    public Sale createSale(Sale sale) {
+        return saleRepository.save(sale);
+    }
+
+//    private Product getProduct(Long productId) {
+//        Optional<Product> optionalProduct = productRepository.findById(productId);
+//        return optionalProduct.orElseThrow(() -> new ProductNotFoundException(productId));
+//    }
 }
 
