@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -25,8 +26,8 @@ public class Sale implements Serializable {
     @JoinColumn(name = "client")
     private Client client;
 
-    @OneToMany(mappedBy = "sale")
-    private ArrayList<SaleDetail> saleDetail;
+    @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SaleDetail> saleDetails = new ArrayList<>();
 
     private String status;
 }

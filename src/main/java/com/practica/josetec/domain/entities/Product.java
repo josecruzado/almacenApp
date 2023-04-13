@@ -40,5 +40,4 @@ public class Product implements Serializable {
         stock = stock - quantity;
     }
 
-    // Constructores, getters y setters
 }

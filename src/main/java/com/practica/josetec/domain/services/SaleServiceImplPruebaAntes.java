@@ -24,7 +24,7 @@ public class SaleServiceImplPruebaAntes {
     @Transactional
     public void makeSale(Sale sale) throws NotEnoughStockException, ProductNotFoundException {
         // Restar la cantidad de products vendidos del stock
-        for (SaleDetail detail : sale.getSaleDetail()) {
+        for (SaleDetail detail : sale.getSaleDetails()) {
             Product product = productRepository.findById(detail.getProduct().getId())
                     .orElseThrow(() -> new ProductNotFoundException("Producto no encontrado"));
             int cantidadVendida = detail.getQuantity();
