@@ -21,13 +21,11 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
     @Autowired
     private SaleRepository saleRepository;
-    @Autowired
-    private ProductMapper productMapper;
 
     @Override
     @Transactional
     public ProductDto createProduct(ProductDto productDto) {
-        Product product = productMapper.toEntity(productDto);
+        Product product = ProductMapper.INSTANCE.INSTANCE.toEntity(productDto);
         productRepository.save(product);
         return productDto;
     }
@@ -56,7 +54,7 @@ public class ProductServiceImpl implements ProductService {
             product.setStock(productDto.getStock());
             // Guardamos los cambios en la base de datos
             productRepository.save(product);
-            return productMapper.toDto(product);
+            return ProductMapper.INSTANCE.toDto(product);
         } else {
             throw new ProductNotFoundException("Product not found with id " + id);
         }
@@ -65,14 +63,14 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDto> getAllProducts() {
         List<Product> products = productRepository.findAll();
         return products.stream()
-                .map(productMapper::toDto)
+                .map(ProductMapper.INSTANCE::toDto)
                 .collect(Collectors.toList());
     }
 
     public ProductDto getProductById(Long id) throws ProductNotFoundException {
         Optional<Product> optionalProduct = productRepository.findById(id);
         Product product = optionalProduct.orElseThrow(() -> new ProductNotFoundException(String.valueOf(id)));
-        return productMapper.toDto(product);
+        return ProductMapper.INSTANCE.toDto(product);
     }
 
 //    public void sellProducts(Long productId, Integer quantity) {
